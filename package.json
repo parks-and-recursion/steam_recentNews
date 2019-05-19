@@ -1,0 +1,23 @@
+{
+  "name": "steam_recentnews",
+  "version": "1.0.0",
+  "description": "steam store emulation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Doughertyg/steam_recentNews.git"
+  },
+  "author": "Graham Dougherty",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Doughertyg/steam_recentNews/issues"
+  },
+  "homepage": "https://github.com/Doughertyg/steam_recentNews#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "webpack": "^4.31.0"
+  }
+}
