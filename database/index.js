@@ -1,14 +1,29 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('steam_updates', 'root', null);
+const sequelize = new Sequelize('steam_updates', 'root', null, {
+	dialect: 'mysql',
+	host: 'localhost'
+});
 
 sequelize
-	.authenticate();
+	.authenticate()
 	.then(() => {
 		console.log('connection successful');
 	})
-	.cathc((err) => {
+	.catch((err) => {
 		console.log('error connecting to database', err);
 	})
+
+const getUpdates = (cb) => {
+	Updates.findAll()
+	.then((data) => {
+		console.log('updates successfuly fetched', data);
+		cb(null, data);
+	})
+	.catch((err) => {
+		console.log('error encountered retreiving data', err);
+		cb(err);
+	})
+}
 
 const Updates = sequelize.define('updates', { //defining our updates model
 
@@ -42,18 +57,6 @@ const Updates = sequelize.define('updates', { //defining our updates model
 		allowNull: true
 	} // TO-DO: add additional fields for modals (likes, dislikes, comments, etc)
 })
-
-const getUpdates = (cb) => {
-	Updates.findAll()
-	.then((data) => {
-		console.log('updates successfuly fetched', data);
-		cb(null, data);
-	})
-	.catch((err) => {
-		console.log('error encountered retreiving data', err);
-		cb(err);
-	})
-}
 
 Updates.sync() // pass force option in? to auto create table
 .then(() => {
