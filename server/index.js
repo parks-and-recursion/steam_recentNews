@@ -19,7 +19,7 @@ App.get('/Updates', (req, res) => {
 			return;
 		}
 
-		console.log('data received from db!', data);
+		console.log('data received from db! chyaaa');
 		res.send(data);
 	})
 })

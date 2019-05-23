@@ -1,29 +1,25 @@
 const Sequelize = require('sequelize');
+const mysql2 = require('mysql2'); //needed to fix build issue with webpack
 const sequelize = new Sequelize('steam_updates', 'root', null, {
 	dialect: 'mysql',
-	host: 'localhost'
+	dialectModule: mysql2, //needed to fix issue with webpack
+	host: 'localhost',
+	pool: {
+		max: 5,
+		min: 0,
+		acquire: 30000,
+		idle: 10000
+	}
 });
 
 sequelize
 	.authenticate()
 	.then(() => {
-		console.log('connection successful');
+		console.log('connection successful yayy');
 	})
 	.catch((err) => {
-		console.log('error connecting to database', err);
+		console.log('error connecting to database LOLL', err);
 	})
-
-const getUpdates = (cb) => {
-	Updates.findAll()
-	.then((data) => {
-		console.log('updates successfuly fetched', data);
-		cb(null, data);
-	})
-	.catch((err) => {
-		console.log('error encountered retreiving data', err);
-		cb(err);
-	})
-}
 
 const Updates = sequelize.define('updates', { //defining our updates model
 
@@ -58,10 +54,25 @@ const Updates = sequelize.define('updates', { //defining our updates model
 	} // TO-DO: add additional fields for modals (likes, dislikes, comments, etc)
 })
 
-Updates.sync() // pass force option in? to auto create table
+sequelize.sync({ force: false, logging: false }) // pass force option in? to auto create table
 .then(() => {
 	console.log('Updates synced');
 })
 
+const getUpdates = (cb) => {
+	console.log('performing get on db!!');
+
+	Updates.findAll()
+	.then((data) => {
+		console.log('updates successfuly fetched', data);
+		cb(null, data);
+	})
+	.catch((err) => {
+		console.log('error encountered retreiving data', err);
+		cb(err);
+	})
+}
+
 module.exports.getUpdates = getUpdates;
+module.exports.db = sequelize;
 module.exports.Updates = Updates;
