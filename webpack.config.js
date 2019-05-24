@@ -8,14 +8,22 @@ module.exports = {
 		filename: 'bundle.js',
 		path: DIST_DIR
 	},
+	externals: ['pg', 'sqlite3', 'tedious', 'pg-hstore'],
+	node: {
+    	fs: 'empty',
+    	net: 'empty',
+    	tls: 'empty',
+  	},
 	module: {
 		rules: [
 		{
 			test: /\.jsx?/,
 			include: SRC_DIR,
-			loader: 'babel-loader',			
-			query:{
-				presets: ['react', 'es2015']
+			use: {
+				loader: 'babel-loader',
+				query: {
+					presets: ['@babel/preset-react', '@babel/env']
+				}				
 			}
 		}]
 	}
