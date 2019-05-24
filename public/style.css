@@ -47,77 +47,51 @@ table {
 	border-spacing: 0;
 }
 
-/* body {
-  background: #141e2c;
-  color: #c1dbf4;
-  font-family: Arial, Helvetica, sans-serif;
-} */
-/* div {
-  display: block;
-} */
-
-/* .review-box {
-  margin: 10px 10px 10px 10px;
-} */
-/* .review-box .player-avatar {
-  display: inline-block;
-} */
-
-/* .review-box .num-owned-games {
-  display: block;
-} */
-
-/* .review-box .username a, 
-.review-box .num-owned-games a,
-.review-box .num-reviews a  {
-  color: #c1dbf4;
-} */
-
-/* .review-box .username {
-  display: inline-block;
-  font-size: 13px;
-  font-weight: bold;
-} */
-
-/* .review-box .num-owned-games a,
-.review-box .num-reviews a  {
-  font-size: 11px;
-} */
-
-
-/* .review-box .player-avatar img {
-  height: 32px;
-  width: 32px;
-} */
-
-/* .vote-header {
-  background: #0e1622; 
-} */
-
-/* .review-box .vote-header .title {
-  font-size: 16px;
-  color: #d6d7d8;
-} */
-
-/* .review-box .vote-header .hours {
-  color: #8091a2;
-  font-size: 11px;
-} */
-
-/* .review-box .right-col .content {
+.main-col {
+  font-family: "Motiva Sans", Sans-serif;
+  width: 616px;
+  background-color:  #1b2838;
   color: #acb2b8;
-  font-size: 13px;
-} */
+  font-size: 12px;
+}
 
-/* .review-box .right-col .posted-date {
-  color: #8091a2;
-  font-size: 10px;
-} */
+.category-header {
+  font-family: "Motiva Sans", Sans-serif;
+  font-size: 14px;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  padding-top: 32px;
+  color: white;
+  line-height: 26px;
+}
 
-/* .left-col {
-  width: 30%;
-} */
+.rev-highlight-content {
+  line-height: 1.5em;
+  padding-bottom: 12px;
+}
 
-/* .right-col {
-  width: 70%;
-} */
+.spacer {
+  background-image: url(https://steamstore-a.akamaihd.net/public/images/v6/maincol_gradient_rule.png);
+  background-repeat: no-repeat;
+  background-position: bottom left;
+}
+
+.rev-link {
+  color: white;
+}
+
+.rev-link:hover {
+  color: #66c0f4;
+}
+
+.about-content {
+  font-family: "Motiva Sans", Sans-serif;
+  color: #acb2b8;
+  font-size: 14px;
+  line-height: 1.5em;
+  font-weight: normal;
+}
+
+strong {
+  font-weight: bold;
+}

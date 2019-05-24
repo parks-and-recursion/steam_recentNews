@@ -34,6 +34,9 @@ const Button = styled.button`
 	float: right;
 	padding: 2px 15px;
 	margin-right: 2px;
+	&:hover {
+		border: 1px solid white;
+	}
 `
 
 const Update_divider = styled.div`
@@ -50,7 +53,7 @@ const View = (props) => (
 			<Header>
 				RECENT UPDATES
 				<Button>
-					View all (#)
+					View all ({props.updates.length})
 				</Button>
 			</Header>
 			<Update story={props.updates[0]}/>

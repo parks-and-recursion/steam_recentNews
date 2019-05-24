@@ -7,6 +7,7 @@ const Post_date = styled.div`
 	letter-spacing: 2px;
 	margin: 5px 0 0 0;
 	line-height: 14px;
+	padding-top: 2px;
 ` 
 
 const Title = styled.div`
@@ -29,6 +30,18 @@ const Img_style = styled.img`
 	max-width: 100%;
 `
 
+const imgSwitch = (props) => {
+	let toggle = Math.random();
+
+	if (toggle > 0.5) {
+		console.log(props.story.img);
+
+		return props.story.img;
+	} else {
+		return "";
+	}
+}
+
 const Comments = styled.div`
 	float: right;
 	color: #56707F;
@@ -40,6 +53,9 @@ const Read_more = styled.div`
 	color: #67c1f5;
 	font-size: 11px;
 	display: inline-block;
+	&:hover {
+		color: white;
+	}
 `
 
 const Spacer = styled.div`
@@ -47,6 +63,12 @@ const Spacer = styled.div`
 	margin-top: 5px;
 	margin-bottom: 5px;
 	background-color: #2f4459;
+`
+
+const Text = styled.div`
+	font-size: 13px;
+	color: #8f98a0;
+	line-height: 18px;
 `
 
 const Update = (props) => (
@@ -60,7 +82,11 @@ const Update = (props) => (
 			<Title>
 				<span>{props.story.title}</span>
 			</Title>
-			<Img_style src={props.story.img} />
+			<Img_style src={imgSwitch(props)} />
+			<Text>
+				<br />
+			{props.story.text}
+			</Text>
 		</Update_container>
 		<Spacer />
 		<Read_more>
