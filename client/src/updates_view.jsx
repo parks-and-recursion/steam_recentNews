@@ -1,13 +1,13 @@
 import React from 'react';
 import Update from './update.jsx';
 import styled from 'styled-components';
+import UpdatesModalAll from './updates_all.jsx';
 
 const Background = styled.div`
 	font-family: "Motiva Sans", Sans-Serif;
 	background-color: #1b2838;
 	width: 616px;
 	height: 262.4px;
-	margin-top: 30px;
 	color: white;
 	display: inline-block;
 `
@@ -50,15 +50,16 @@ const View = (props) => (
 
 	<div className="view">
 		<Background>
+			<UpdatesModalAll state={props.state} updates={props.updates} persisModal={props.persisModal} hideModal={props.toggleModal} />
 			<Header>
 				RECENT UPDATES
-				<Button>
+				<Button onClick={props.toggleModal}>
 					View all ({props.updates.length})
 				</Button>
 			</Header>
-			<Update story={props.updates[0]}/>
+			<Update story={props.updates[0]} />
 			<Update_divider />
-			<Update story={props.updates[1]}/>
+			<Update story={props.updates[1]} />
 		</Background>
 	</div>
 

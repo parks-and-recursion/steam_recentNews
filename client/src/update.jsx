@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Updatemodal from './update_modal.jsx';
 
 const Post_date = styled.div`
 	color: #56707F;
@@ -71,33 +72,64 @@ const Text = styled.div`
 	line-height: 18px;
 `
 
-const Update = (props) => (
+const Wrapper = styled.div`
+	display: inline-block;
+	background-color: #1b2838;
+`
 
-	
-	<Update_col>
-		<Update_container>
-			<Post_date>
-				<span>{props.story.post_date}</span>
-			</Post_date>
-			<Title>
-				<span>{props.story.title}</span>
-			</Title>
-			<Img_style src={imgSwitch(props)} />
-			<Text>
-				<br />
-			{props.story.text}
-			</Text>
-		</Update_container>
-		<Spacer />
-		<Read_more>
-			<a onClick={()=>console.log('do something')}>READ MORE</a>
-		</Read_more>
-		<Comments>
-			<span onClick={()=>console.log('do something')}>{props.story.comment_count} comments</span>
-		</Comments>
-	</Update_col>
-	
+class Update extends React.Component {
+	constructor(props) {
+		super(props)
 
-)
+		this.state = {
+			modalToggle: false
+		}
+	}
+
+	toggleModal() {
+
+		this.setState({
+			modalToggle: !this.state.modalToggle
+		})
+	}
+
+	persistModal(e) {
+
+		e.stopPropogation();
+	}
+
+	render() {
+
+		return (
+
+		
+			<Update_col>
+				<Updatemodal story={this.props.story} state={this.state} persistModal={this.persistModal.bind(this)} hideModal={this.toggleModal.bind(this)} />
+				<Update_container>
+					<Post_date>
+						<span>{this.props.story.post_date}</span>
+					</Post_date>
+					<Title>
+						<span>{this.props.story.title}</span>
+					</Title>
+					<Img_style src={imgSwitch(this.props)} />
+					<Text>
+						<br />
+					{this.props.story.text}
+					</Text>
+				</Update_container>
+				<Spacer />
+				<Read_more>
+					<a onClick={this.toggleModal.bind(this)}>READ MORE</a>
+				</Read_more>
+				<Comments>
+					<span onClick={()=>console.log('do something')}>{this.props.story.comment_count} comments</span>
+				</Comments>
+			</Update_col>
+		
+
+		)
+	}
+}
 
 export default Update;
