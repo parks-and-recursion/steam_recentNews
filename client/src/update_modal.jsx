@@ -82,7 +82,7 @@ const Text = styled.div`
 	margin: 3px 5px;
 `
 
-const updateModal = (props) => {
+const UpdateModal = (props) => {
 
 	if (!props.state.modalToggle) {
 		return null;
@@ -105,4 +105,4 @@ const updateModal = (props) => {
 	)
 }
 
-export default updateModal;
+export default UpdateModal;

@@ -2,6 +2,9 @@
 // jk the state will be on app but changed via clicks on the modal and on the parent
 import React from 'react';
 import styled from 'styled-components';
+import UpdateModal from './update_modal.jsx';
+import Modal_all from './modal_all.jsx';
+import Pages from './page_nav.jsx';
 
 const Overlay = styled.div`
 	position: fixed;
@@ -30,7 +33,7 @@ const Modal = styled.div`
 	position: relative;
 	outline: 0;
 	width: 75%;
-	max-width: 600px;
+	max-width: 616px;
 	display: inline-block;
 	box-sizing: border-box;
 	background-color: #1b2838;
@@ -40,72 +43,89 @@ const Modal = styled.div`
 	text-align: left;
 `
 
-const Img = styled.img`
-	width: 98%;
-	margin: 10px auto;
-	display: block;
-`
-
-const Title = styled.div`
-	color: #66C0F4;
-	font-family: "Motiva Sans", Sans-Serif;
-	font-size: 28px;
-	text-align: left;
-	margin: 5px;
-`
-
-const Date = styled.div`
-	font-size: 10px;
-	color: white;
-	text-transform: uppercase;
-	display: inline;
-	text-align: left;
-	margin: 5px;
-`
-
-const User = styled.div`
-	color: #5d7489;
-	font-size: 10px;
-	text-align: left;
-	display: inline;
-	text-transform: uppercase;
-	margin: 3px;
+const Page_btn = styled.div`
+	background-color: rgba( 103, 193, 245, 0.2 );
+	border: 1px transparent;
+	border-radius: 3px;
+	padding: 0 16px;
+	color: #66c0f4;
+	height: 15px;
+	line-height: 16px;
+	margin: 4px 7px;
+	display: inline-block;
+	float: right;
 	&:hover {
-		color: #66c0f4;
+		background-color: #66c0f4;
+		border-color: #66c0f4;
+		color: white;
 	}
 `
 
-const Text = styled.div`
-	font-size: 14px;
-	color: #acb2b8;
-	line-height: 18px;
-	margin: 3px 5px;
+const Page_nav = styled.div`
+	font-size: 10px;
+	color: #ebebeb;
+	float: right;
+	text-align: left;
+	margin: 7px;
+	display: inline-block;
+	&:hover {
+		text-decoration: underline;
+	}
 `
 
-const updateModal = (props) => {
+class UpdatesModalAll extends React.Component {
+	constructor(props) {
+		super(props);
 
-	if (!props.state.modalToggle) {
-		return null;
-	} 
+		this.state = {
+			page: 1,
+		}
+	}
+
+	handlePageChange(page, length) {
+		console.log('clicked!');
+
+		if (page > length / 5 || page < 1) {
+			return;
+		}
+
+		this.setState({
+			page: page
+		})
+	}
 
 	// need this script to import modal component and return 5 here
 	// pass in stories here to render
+	// create state here that tracks length of array and paginates 
+	//
 
+	render() {
 
-	return (
+		if (!this.props.state.modalToggle) {
+			return null;
+		} 
 
-		<Overlay>
-			<Content onClick={props.hideModal}>
-				<Modal onClick={(e) => e.stopPropagation()}>
-					<Title>{props.story.title}</Title>
-					<Date>{props.story.post_date} - </Date><User>{props.story.posted_by}</User>
-					<Img src={props.story.img} />
-					<Text>{props.story.text}</Text>
-				</Modal>
-			</Content>
-		</Overlay>
-
-	)
+		return (
+			<div>
+				<Overlay>
+					<Content onClick={this.props.hideModal}>
+					<Modal onClick={(e) => e.stopPropagation()}>
+					<Pages updates={this.props.updates} page={this.state.page} handlePageChange={this.handlePageChange.bind(this)} />
+							<Modal_all story={this.props.updates[(this.state.page - 1) * 5] ? this.props.updates[this.state.page] : null} /><br />
+							<br />
+							<Modal_all story={this.props.updates[((this.state.page - 1) * 5) + 1] ? this.props.updates[this.state.page + 1] : null} /><br />
+							<br />
+							<Modal_all story={this.props.updates[((this.state.page - 1) * 5) + 2] ? this.props.updates[this.state.page + 2] : null} /><br />
+							<br />
+							<Modal_all story={this.props.updates[((this.state.page - 1) * 5) + 3] ? this.props.updates[this.state.page + 3] : null} /><br />
+							<br />
+							<Modal_all story={this.props.updates[((this.state.page - 1) * 5) + 4] ? this.props.updates[this.state.page + 4] : null} />
+					</Modal>
+					</Content>
+				</Overlay>
+			</div>
+		)
+	}
 }
 
-export default updateModal;
+export default UpdatesModalAll;

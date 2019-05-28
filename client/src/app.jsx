@@ -9,7 +9,8 @@ class App extends React.Component {
 		super(props);
 
 		this.state = {
-			updates: []
+			updates: [],
+			modalToggle: false
 		}
 	}
 
@@ -40,6 +41,18 @@ class App extends React.Component {
 	// 	console.log('mounted');
 	// }
 
+	toggleModal() {
+
+		this.setState({
+			modalToggle: !this.state.modalToggle
+		})
+	}
+
+	persistModal(e) {
+
+		e.stopPropogation();
+	}
+
 	render() {
 
 		//first check if state updates is an empty array
@@ -56,7 +69,7 @@ class App extends React.Component {
 			return (
 				
 				<div>
-					<View updates={this.state.updates} />
+					<View updates={this.state.updates} state={this.state} toggleModal={this.toggleModal.bind(this)} persistModal={this.persistModal.bind(this)} />
 				</div>
 				
 			)

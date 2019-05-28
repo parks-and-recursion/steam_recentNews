@@ -1,6 +1,7 @@
 import React from 'react';
 import Update from './update.jsx';
 import styled from 'styled-components';
+import UpdatesModalAll from './updates_all.jsx';
 
 const Background = styled.div`
 	font-family: "Motiva Sans", Sans-Serif;
@@ -49,9 +50,10 @@ const View = (props) => (
 
 	<div className="view">
 		<Background>
+			<UpdatesModalAll state={props.state} updates={props.updates} persisModal={props.persisModal} hideModal={props.toggleModal} />
 			<Header>
 				RECENT UPDATES
-				<Button>
+				<Button onClick={props.toggleModal}>
 					View all ({props.updates.length})
 				</Button>
 			</Header>
