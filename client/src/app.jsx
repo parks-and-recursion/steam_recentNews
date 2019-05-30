@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import View from './updates_view.jsx';
+import Checkout from './checkout_comp.jsx';
 const db = require('../../database');
 const $ = require('jquery');
 
@@ -10,22 +11,40 @@ class App extends React.Component {
 
 		this.state = {
 			updates: [],
-			modalToggle: false
+			modalToggle: false,
+			id: 1,
+			game: {},
+			platforms: [],
+			vr_supprt: []
 		}
 	}
 
 	componentDidMount() {
 
-		$.get('http://localhost:3003/updates', (data) => {
-
-			console.log('got data back!!', data);
-
-			this.setState({
-				updates: data
-			})
-		})
-
 		console.log('mounted');
+
+		$.get('http://localhost:3003/updates')
+			.done((data) => {
+
+				console.log('[app.jsx: 27] got updates data back!!');
+
+				this.setState({
+					updates: data
+				})
+			})
+			.done(() => {
+				$.get(`http://localhost:3003/games/${this.state.id}`)
+				.done((data) => {
+
+					console.log('[app.jsx: 37] game got!', data);
+
+					this.setState({
+						game: data[0],
+						platforms: data[0].platforms.split(' '),
+						vr_supprt: data[0].vr_support.split(' ')
+					})
+				})
+			})
 	}
 
 	// handleClick() {
@@ -69,6 +88,7 @@ class App extends React.Component {
 			return (
 				
 				<div>
+					<Checkout platforms={this.state.platforms} title={this.state.game} vr={this.state.vr_supprt}/>
 					<View updates={this.state.updates} state={this.state} toggleModal={this.toggleModal.bind(this)} persistModal={this.persistModal.bind(this)} />
 				</div>
 				
