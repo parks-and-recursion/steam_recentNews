@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './app.jsx';
+import Updates from './app.jsx';
 
 
-ReactDOM.render(<App />, document.getElementById('App'));
+ReactDOM.render(<Updates />, document.getElementById('Updates'));

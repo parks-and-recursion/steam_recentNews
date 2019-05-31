@@ -54,9 +54,76 @@ const Updates = sequelize.define('updates', { //defining our updates model
 	} // TO-DO: add additional fields for modals (likes, dislikes, comments, etc)
 })
 
+const Games = sequelize.define('games', {
+	id: {
+		type: Sequelize.INTEGER,
+		allowNull: false,
+		primaryKey: true
+	}, 
+	title: {
+		type: Sequelize.STRING,
+		allowNull: false
+	},
+	img: {
+		type: Sequelize.STRING,
+		allowNull: true
+	},
+	related: {
+		type: Sequelize.STRING,
+		allowNull: true
+	},
+	text: {
+		type: Sequelize.TEXT,
+		allowNull: false
+	},
+	platforms: {
+		type: Sequelize.STRING,
+		allowNull: true
+	},
+	vr_support: {
+		type: Sequelize.STRING,
+		allowNull: true
+	}
+})
+
+const Comments = sequelize.define('comments', {
+	id: {
+		type: Sequelize.INTEGER,
+		allowNull: false,
+		primaryKey: true
+	},
+	posted_by: {
+		type: Sequelize.STRING,
+		allowNull: false
+	},
+	user_id: {
+		type: Sequelize.INTEGER,
+		allowNull: false
+	},
+	post_date: {
+		type: Sequelize.DATEONLY,
+		allowNull: false
+	},
+	text: {
+		type: Sequelize.TEXT,
+		allowNull: false
+	},
+	user_img: {
+		type: Sequelize.STRING,
+		allowNull: true
+	},
+	user_steam_level: {
+		type: Sequelize.INTEGER,
+		allowNull: false
+	},
+})
+
 sequelize.sync({ force: false, logging: false }) // pass force option in? to auto create table
 .then(() => {
-	console.log('Updates synced');
+	console.log('all synced');
+})
+.catch(() => {
+	console.log('[db.index.js:126] sync failed');
 })
 
 const getUpdates = (cb) => {
@@ -64,15 +131,36 @@ const getUpdates = (cb) => {
 
 	Updates.findAll()
 	.then((data) => {
-		console.log('updates successfuly fetched', data);
+		console.log('[database/index.jsx:134] updates successfuly fetched');
 		cb(null, data);
 	})
 	.catch((err) => {
-		console.log('error encountered retreiving data', err);
+		console.log('[db/index.jsx:138] error encountered retreiving data', err);
+		cb(err);
+	})
+}
+
+const getGame = (id, cb) => {
+	console.log('performing get on db!!');
+
+	Games.findAll({
+		where: {
+			id: id
+		}
+	})
+	.then((data) => {
+		console.log('[db/index.jsx: 152] game fetched using id!', data);
+		cb(null, data);
+	})
+	.catch((err) => {
+		console.log('error encountered fetching game from db:', err);
 		cb(err);
 	})
 }
 
 module.exports.getUpdates = getUpdates;
+module.exports.getGame = getGame;
 module.exports.db = sequelize;
 module.exports.Updates = Updates;
+module.exports.Games = Games;
+module.exports.Comments = Comments;
