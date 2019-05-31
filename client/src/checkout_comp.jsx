@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+const styled = window.styled
 import Platforms from './platforms_comp.jsx';
 import PurchaseButton from './purchase_btn.jsx';
 

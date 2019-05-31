@@ -1,6 +1,6 @@
 import React from 'react';
 import Update from './update.jsx';
-import styled from 'styled-components';
+const styled = window.styled
 import UpdatesModalAll from './updates_all.jsx';
 
 const Background = styled.div`

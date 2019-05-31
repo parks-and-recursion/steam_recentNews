@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+const styled = window.styled
 
 // TO-DO: generate dynamically... store about content in db, preferably with html markup or with someway to indicate paragraphs and headers
 // TO-DO: store reviews on db as review-highlights or similar and get then fill here dynamically
