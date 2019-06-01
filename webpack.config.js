@@ -8,8 +8,18 @@ module.exports = {
 		filename: 'bundle.js',
 		path: DIST_DIR
 	},
-	externals: ['pg', 'sqlite3', 'tedious', 'pg-hstore'],
-	node: {
+	externals: [
+    	{'styled-components': {
+      		commonjs: 'styled-components',
+      		commonjs2: 'styled-components',
+      		amd: 'styled-components'
+    	}},
+    	'pg', 
+    	'sqlite3', 
+    	'tedious', 
+    	'pg-hstore'
+  	],
+  	node: {
     	fs: 'empty',
     	net: 'empty',
     	tls: 'empty',

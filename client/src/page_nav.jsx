@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+const styled = window.styled
 
 const Page_btn = styled.div`
 	background-color: rgba( 103, 193, 245, 0.2 );

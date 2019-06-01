@@ -18,7 +18,7 @@
 
 ## Usage
 
-> Clone to local repo, run webpac to bundle jsx files, start server, open page
+> Clone to local repo, run npm initialize to initialize my database schema, run npm seed to seed database, run npm start to start server, open browser to localhost:3003... Make sure database -u and -p match in seed script and that database names don't conflict or if using one db that the table names don't.
 
 ## Requirements
 

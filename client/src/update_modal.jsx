@@ -1,7 +1,7 @@
 // ok this is the modal component for each story
 // jk the state will be on app but changed via clicks on the modal and on the parent
 import React from 'react';
-import styled from 'styled-components';
+const styled = window.styled
 
 const Overlay = styled.div`
 	position: fixed;

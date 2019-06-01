@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import View from './updates_view.jsx';
 import Checkout from './checkout_comp.jsx';
+import About from './about.jsx';
 const db = require('../../database');
 const $ = require('jquery');
 
@@ -90,8 +91,8 @@ class App extends React.Component {
 				<div>
 					<Checkout platforms={this.state.platforms} title={this.state.game} vr={this.state.vr_supprt}/>
 					<View updates={this.state.updates} state={this.state} toggleModal={this.toggleModal.bind(this)} persistModal={this.persistModal.bind(this)} />
-				</div>
-				
+					<About />
+				</div>				
 			)
 		}
 	}
